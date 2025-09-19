@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía del Trabajo Técnico Final - CTP Antonio M. Marte</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .step-card {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+        .step-card:before {
+            content: attr(data-step);
+            position: absolute;
+            left: -1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3rem;
+            height: 3rem;
+            background-color: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #3b82f6;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 1rem;
+        }
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0.875rem; /* center the line */
+            top: 1.5rem;
+            bottom: 1.5rem;
+            width: 4px;
+            background-color: #dbeafe;
+            border-radius: 2px;
+        }
+        details > summary {
+            cursor: pointer;
+            list-style: none;
+            transition: color 0.2s ease;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] > summary {
+            color: #3b82f6;
+        }
+        .tech-button {
+            transition: all 0.3s ease;
+        }
+        .tech-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+        .chart-bar {
+            transition: width 1s ease-in-out;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 2rem;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0; transform: scale(0.9);}
+            to {opacity: 1; transform: scale(1);}
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body class="bg-blue-50 text-gray-800">
+
+    <div class="container mx-auto px-4 py-8 md:py-16">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600">
+                    Tu Trabajo Técnico Final
+                </span>
+            </h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                Guía interactiva para estudiantes del CTP Antonio Martín Marte. ¡El último paso para ser <strong class="text-blue-600">Técnico en TIC</strong>! 👨‍💻👩‍💻
+            </p>
+        </header>
+
+        <main class="grid grid-cols-1 gap-8">
+            <!-- ¿Qué es el Trabajo Final? -->
+            <section id="que-es" class="card p-8">
+                <h2 class="text-2xl font-bold mb-4">🤔 ¿Qué es el Trabajo Técnico Final (TFI)?</h2>
+                <p class="text-gray-700">
+                    Es un <strong class="text-indigo-600">Proyecto de Aprendizaje Interdisciplinario (PAI)</strong> donde aplicarás todo lo que aprendiste. Integrarás tus conocimientos de:
+                </p>
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-blue-100 text-blue-800 p-4 rounded-xl">💻 Taller de Programación Web</div>
+                    <div class="bg-indigo-100 text-indigo-800 p-4 rounded-xl">🎨 Laboratorio: Diseño de Software</div>
+                    <div class="bg-purple-100 text-purple-800 p-4 rounded-xl">🤖 Laboratorio: Sistemas Embebidos</div>
+                </div>
+                <p class="mt-6 text-gray-700">
+                    Además, usarás tu experiencia del programa <strong class="text-green-600">"Aprender a Emprender"</strong> para crear una solución con impacto real.
+                </p>
+            </section>
+
+            <!-- El Desafío -->
+            <section id="desafio" class="card p-8 bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
+                <h2 class="text-2xl font-bold mb-4">🚀 El Desafío: Soluciones Tecnológicas con Impacto Triple</h2>
+                <p>Tu misión es identificar un problema real en tu comunidad y desarrollar una solución tecnológica que genere un triple impacto:</p>
+                <div class="mt-6 flex flex-col md:flex-row justify-around items-center gap-6">
+                    <div class="text-center">
+                        <span class="text-5xl">💰</span>
+                        <p class="font-semibold mt-2">Impacto Económico</p>
+                        <p class="text-sm opacity-90">Que sea un proyecto viable y sostenible.</p>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-5xl">❤️</span>
+                        <p class="font-semibold mt-2">Impacto Social</p>
+                        <p class="text-sm opacity-90">Que mejore la vida de las personas.</p>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-5xl">🌍</span>
+                        <p class="font-semibold mt-2">Impacto Ambiental</p>
+                        <p class="text-sm opacity-90">Que cuide nuestro planeta.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tu Misión en Pasos -->
+            <section id="mision" class="card p-8">
+                <h2 class="text-2xl font-bold mb-4">🗺️ Tu Misión: El Camino Hacia el Éxito</h2>
+                <div class="timeline mt-6 space-y-8">
+                    <div class="step-card" data-step="1">
+                        <h3 class="font-semibold text-lg">Formen su equipo y definan un problema</h3>
+                        <p class="text-gray-600">Busquen una necesidad real en su entorno que les motive a actuar. ¡El trabajo en equipo es clave!</p>
+                    </div>
+                    <div class="step-card" data-step="2">
+                        <h3 class="font-semibold text-lg">Diseñen la solución con Design Thinking</h3>
+                        <p class="text-gray-600">Apliquen el proceso: Empatizar, Definir, Idear, Prototipar y Testear. ¡Pongan al usuario en el centro!</p>
+                    </div>
+                    <div class="step-card" data-step="3">
+                        <h3 class="font-semibold text-lg">¡A construir el prototipo funcional!</h3>
+                        <p class="text-gray-600">Es hora de integrar las tres áreas técnicas en una solución real y tangible.</p>
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                           <button onclick="showModal('modal-web')" class="tech-button bg-blue-500 text-white font-bold py-2 px-4 rounded-full">Web App</button>
+                           <button onclick="showModal('modal-software')" class="tech-button bg-indigo-500 text-white font-bold py-2 px-4 rounded-full">Diseño de Software</button>
+                           <button onclick="showModal('modal-embebidos')" class="tech-button bg-purple-500 text-white font-bold py-2 px-4 rounded-full">Sistema Embebido</button>
+                        </div>
+                    </div>
+                    <div class="step-card" data-step="4">
+                        <h3 class="font-semibold text-lg">Elaboren su Plan de Negocios</h3>
+                        <p class="text-gray-600">Documenten su idea usando el Modelo Canvas y proyecciones financieras para demostrar su viabilidad.</p>
+                    </div>
+                    <div class="step-card" data-step="5">
+                        <h3 class="font-semibold text-lg">Preparen la presentación y defensa final</h3>
+                        <p class="text-gray-600">Deberán "vender" su proyecto a un jurado. ¡Preparen un pitch increíble y demuestren el funcionamiento de su prototipo!</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Planificación Semanal -->
+            <section id="planificacion" class="card p-8">
+                <h2 class="text-2xl font-bold mb-4">🗓️ Planificación Semanal: ¡6 Semanas para el Éxito!</h2>
+                <p class="text-gray-600 mb-6">Este es el cronograma de entregas. ¡Organiza tu tiempo para cumplir con cada hito!</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Semana 1 -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-lg text-blue-600">Semana 1: Ideación y Planificación</h3>
+                        <ul class="mt-3 list-disc list-inside text-gray-700 space-y-2">
+                            <li>🎯 Definir problemática y ODS.</li>
+                            <li>🤔 Aplicar Design Thinking.</li>
+                            <li>📝 Crear wireframes de la app.</li>
+                            <li>⚙️ Conceptualizar el hardware.</li>
+                        </ul>
+                    </div>
+                    <!-- Semana 2 -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-lg text-blue-600">Semana 2: Desarrollo del Prototipo</h3>
+                        <ul class="mt-3 list-disc list-inside text-gray-700 space-y-2">
+                            <li>📈 Completar Modelo Canvas.</li>
+                            <li>👨‍💻 Desarrollar el Frontend.</li>
+                            <li>🔩 Implementar el firmware.</li>
+                            <li>🤝 Definir metodología ágil.</li>
+                        </ul>
+                    </div>
+                    <!-- Semana 3 -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-lg text-blue-600">Semana 3: Integración y Documentación</h3>
+                        <ul class="mt-3 list-disc list-inside text-gray-700 space-y-2">
+                            <li>🔗 Desarrollar el Backend.</li>
+                            <li>🔧 Realizar pruebas del hardware.</li>
+                            <li>✍️ Iniciar documentación técnica.</li>
+                            <li>💰 Borrador de proyección financiera.</li>
+                        </ul>
+                    </div>
+                    <!-- Semana 4 -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-lg text-blue-600">Semana 4: Testing e Iteración</h3>
+                        <ul class="mt-3 list-disc list-inside text-gray-700 space-y-2">
+                            <li>🐞 Realizar pruebas de integración.</li>
+                            <li>🔄 Iterar y mejorar el prototipo.</li>
+                            <li>📊 Completar análisis FODA.</li>
+                            <li>🛠️ Aplicar correcciones y mejoras.</li>
+                        </ul>
+                    </div>
+                    <!-- Semana 5 -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-lg text-blue-600">Semana 5: Informe Final</h3>
+                        <ul class="mt-3 list-disc list-inside text-gray-700 space-y-2">
+                            <li>📑 Redactar el informe final.</li>
+                            <li>📋 Consolidar toda la documentación.</li>
+                            <li>✨ Pulir todos los entregables escritos.</li>
+                        </ul>
+                    </div>
+                    <!-- Semana 6 -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-lg text-blue-600">Semana 6: ¡La Gran Final!</h3>
+                        <ul class="mt-3 list-disc list-inside text-gray-700 space-y-2">
+                            <li>🎤 Preparar el pitch de presentación.</li>
+                            <li>🎬 Ensayo de la demo en vivo.</li>
+                            <li>🏆 ¡Presentación y defensa final!</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ¿Qué se entrega? -->
+            <section id="entregables" class="card p-8">
+                <h2 class="text-2xl font-bold mb-4">📦 ¿Qué se Entrega?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">📄 Informe Escrito</h3>
+                        <p class="text-gray-600 mb-4">Un documento completo (máx. 50 pág.) que incluye el Plan de Negocios y toda la Documentación Técnica del proyecto.</p>
+                         <details class="bg-gray-100 p-4 rounded-lg">
+                            <summary class="font-semibold text-gray-800">Ver Estructura del Informe ▼</summary>
+                            <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
+                                <li>Sección 1: Información General</li>
+                                <li>Sección 2: Proyecto y Fundamentación</li>
+                                <li>Sección 3: Desarrollo Técnico</li>
+                                <li>Sección 4: Plan de Negocios</li>
+                                <li>Sección 5: Gestión del Proyecto</li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">🎤 Presentación Oral y Demo</h3>
+                        <p class="text-gray-600 mb-4">Una exposición de 15-20 min. (más preguntas) donde presentan su "pitch" y muestran el prototipo funcionando en vivo.</p>
+                        <details class="bg-gray-100 p-4 rounded-lg">
+                            <summary class="font-semibold text-gray-800">Claves de la Presentación ▼</summary>
+                             <ul class="list-disc list-inside mt-2 space-y-1 text-gray-700">
+                                <li>Elevator Pitch atractivo</li>
+                                <li>Demostración del prototipo</li>
+                                <li>Explicación del modelo de negocio</li>
+                                <li>Reflexión sobre aprendizajes</li>
+                                <li>¡Participación de todo el equipo!</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ¿Cómo se evalúa? -->
+             <section id="evaluacion" class="card p-8">
+                <h2 class="text-2xl font-bold mb-4">📊 ¿Cómo se Evalúa?</h2>
+                <p class="text-gray-600 mb-6">La nota final es una ponderación de tu trabajo técnico, tu visión de negocio, tus habilidades blandas y la calidad de tu presentación.</p>
+                <div id="evaluation-chart" class="space-y-4">
+                    <div class="w-full bg-gray-200 rounded-full">
+                        <div class="chart-bar bg-blue-500 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full" style="width: 0%" data-width="45%">
+                            45% - Calidad Técnica y Prototipo
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full">
+                        <div class="chart-bar bg-green-500 text-xs font-medium text-green-100 text-center p-2 leading-none rounded-full" style="width: 0%" data-width="25%">
+                            25% - Plan de Negocios y Viabilidad
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full">
+                        <div class="chart-bar bg-yellow-500 text-xs font-medium text-yellow-100 text-center p-2 leading-none rounded-full" style="width: 0%" data-width="20%">
+                            20% - Habilidades Blandas y Equipo
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full">
+                        <div class="chart-bar bg-red-500 text-xs font-medium text-red-100 text-center p-2 leading-none rounded-full" style="width: 0%" data-width="10%">
+                            10% - Presentación y Documentación
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="text-center mt-16">
+            <p class="text-2xl font-bold text-gray-800">¡Están a un paso de la meta!</p>
+            <p class="text-gray-600 mt-2">Este proyecto es la culminación de su esfuerzo. ¡Demuestren todo lo que son capaces de hacer! 🚀✨</p>
+        </footer>
+    </div>
+    
+    <!-- Modals -->
+    <div id="modal-web" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeModal('modal-web')">&times;</span>
+        <h3 class="text-2xl font-bold mb-4">💻 Taller de Programación Web</h3>
+        <p>Aquí crearán la interfaz con la que interactuará el usuario.</p>
+        <ul class="list-disc list-inside mt-4 space-y-2 text-gray-700">
+            <li><strong>Arquitectura Cliente-Servidor:</strong> Definir cómo se comunican el frontend y el backend.</li>
+            <li><strong>Frontend:</strong> Desarrollar la parte visual con HTML, CSS y JavaScript. Debe ser intuitiva y accesible.</li>
+            <li><strong>Backend:</strong> Programar la lógica del servidor, la conexión a bases de datos y la creación de APIs para manejar la información.</li>
+            <li><strong>Despliegue:</strong> Poner la aplicación en un entorno real para que sea accesible.</li>
+        </ul>
+      </div>
+    </div>
+    <div id="modal-software" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeModal('modal-software')">&times;</span>
+        <h3 class="text-2xl font-bold mb-4">🎨 Laboratorio: Diseño de Software</h3>
+        <p>Es el cerebro de su solución. Aquí se define la lógica y la estructura interna.</p>
+        <ul class="list-disc list-inside mt-4 space-y-2 text-gray-700">
+            <li><strong>Metodología Ágil:</strong> Usar Scrum o Kanban para organizar el trabajo y adaptarse a los cambios.</li>
+            <li><strong>Diseño Modular:</strong> Crear un software bien estructurado, con bajo acoplamiento y alta cohesión.</li>
+            <li><strong>Diseño con Objetos:</strong> Utilizar diagramas de clases, objetos y secuencia si el proyecto lo requiere.</li>
+            <li><strong>Testing:</strong> Realizar pruebas unitarias y de integración para asegurar que todo funcione correctamente.</li>
+        </ul>
+      </div>
+    </div>
+    <div id="modal-embebidos" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeModal('modal-embebidos')">&times;</span>
+        <h3 class="text-2xl font-bold mb-4">🤖 Laboratorio: Sistemas Embebidos</h3>
+        <p>El hardware que interactúa con el mundo real: captura datos, controla dispositivos, etc.</p>
+        <ul class="list-disc list-inside mt-4 space-y-2 text-gray-700">
+            <li><strong>Hardware:</strong> Diseñar o seleccionar los componentes: microcontrolador, sensores, actuadores.</li>
+            <li><strong>Arquitectura:</strong> Detallar cómo funciona el sistema embebido.</li>
+            <li><strong>Firmware:</strong> Programar el software que corre dentro del microcontrolador.</li>
+            <li><strong>Interfaces:</strong> Diseñar la comunicación con otros componentes (USB, I2C, etc.) y los circuitos de apoyo.</li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+        // Modal logic
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = "none";
+                }
+            }
+        }
+
+        // Animate chart bars on scroll
+        const chart = document.getElementById('evaluation-chart');
+        const bars = document.querySelectorAll('.chart-bar');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    bars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                    observer.unobserve(chart);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(chart);
+    </script>
+
+</body>
+</html>
